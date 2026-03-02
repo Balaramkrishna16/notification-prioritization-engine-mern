@@ -9,7 +9,9 @@ const app = express();
 
 // --- 1. GLOBAL MIDDLEWARE ---
 app.use(cors({
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  origin: ["http://localhost:3000", 
+    "http://127.0.0.1:3000",
+    "https://notification-prioritizati-git-a87795-krishnas-projects-45bcd286.vercel.app"],
   credentials: true
 }));
 
