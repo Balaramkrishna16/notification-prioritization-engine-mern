@@ -15,6 +15,11 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 NEURAL LINK ACTIVE ON PORT ${PORT}`);
 });
 
+app.use(cors({
+  origin: "https://notification-prioritization-engine-tau.vercel.app", // Put your actual Vercel URL here
+  credentials: true
+}));
+
 // 3. Connect to Database in the background
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ CLUSTER ACCESS GRANTED"))
