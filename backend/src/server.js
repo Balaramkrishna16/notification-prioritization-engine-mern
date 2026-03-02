@@ -1,3 +1,4 @@
+import 'dotenv/config'; 
 import mongoose from "mongoose";
 import dotenvFlow from "dotenv-flow";
 import dns from "dns";
