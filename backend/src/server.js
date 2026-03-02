@@ -1,32 +1,24 @@
-import 'dotenv/config'; 
-import mongoose from "mongoose";
-import dotenvFlow from "dotenv-flow";
-import dns from "dns";
-import app from "./app.js";
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import 'dotenv/config';
 
-dotenvFlow.config();
-
-// Force IPv4 resolution
-dns.setDefaultResultOrder("ipv4first");
-
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI, {
-  serverApi: {
-    version: '1',
-    strict: true,
-    deprecationErrors: true,
-  }
-})
-.then(() => {
-  console.log("✅ MongoDB Connected");
+// 1. Middleware
+app.use(cors());
+app.use(express.json());
 
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
-})
-.catch(err => {
-  console.error("❌ DB Connection Error:", err);
+// 2. Start the Server IMMEDIATELY (Crucial for Render)
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 NEURAL LINK ACTIVE ON PORT ${PORT}`);
 });
 
+// 3. Connect to Database in the background
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ CLUSTER ACCESS GRANTED"))
+    .catch(err => console.error("❌ DB CONNECTION ERROR:", err));
+
+// 4. Routes
+// app.use('/api', notificationRoutes);
